@@ -3,56 +3,32 @@ services:
     name: n8n-production
     runtime: docker
     plan: starter
-
-    image:
-      url: docker.io/n8nio/n8n:latest
-
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: N8N_HOST
         value: n8n-production-1mw3.onrender.com
-
       - key: N8N_PROTOCOL
         value: https
-
       - key: N8N_PORT
         value: 5678
-
       - key: WEBHOOK_URL
         value: https://n8n-production-1mw3.onrender.com/
-
       - key: DB_TYPE
-        value: postgresdb
-
-      - key: DB_POSTGRESDB_HOST
-        value: dpg-d8cntscp3tds73e0m6i0-a.oregon-postgres.render.com
-
-      - key: DB_POSTGRESDB_PORT
-        value: 5432
-
-      - key: DB_POSTGRESDB_DATABASE
-        value: n8n_db_sxzq
-
-      - key: DB_POSTGRESDB_USER
-        value: n8n_db_sxzq_user
-
-      - key: DB_POSTGRESDB_PASSWORD
-        value: 6NVSrImYXK08VewP9yH7bhubmMdCnQKX
-
+        value: sqlite
       - key: N8N_ENCRYPTION_KEY
         value: n8n-production-master-encryption-key-2026
-
-      - key: EXECUTIONS_PROCESS
-        value: main
-
-      - key: N8N_RUNNERS_ENABLED
-        value: true
-
       - key: N8N_DIAGNOSTICS_ENABLED
         value: false
-
       - key: N8N_VERSION_NOTIFICATIONS_ENABLED
         value: false
-
+      - key: NODE_FUNCTION_ALLOW_EXTERNAL
+        value: pizzip,docxtemplater,xlsx
+      - key: NODE_FUNCTION_ALLOW_BUILTIN
+        value: https,fs,path
+      - key: N8N_DEFAULT_BINARY_DATA_MODE
+        value: default
+      - key: NODE_TLS_REJECT_UNAUTHORIZED
+        value: "0"
     disk:
       name: n8n-data
       mountPath: /home/node/.n8n
